@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    {% if messages %}
+        {% for message in messages %}
+            <p{% if message.tags %} class = "{{ message.tag }}" {% endif %}>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+    {% if request.session.errors %}
+        {% for error in request.session.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    {% endif %}
+    <!-- {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %} -->
+    <form action="/create" method = "POST">
+        {% csrf_token %}
+        First Name: <input type="text" id="first_name" name="first_name"><br>
+        Last Name: <input type="text" id="last_name" name="last_name"><br>
+        Email: <input type="text" id="email" name="email"><br>
+        Password: <input type="password" id="pw" name="pw"><br>
+        Confirm Password: <input type="password" id="pw_confirm" name="pw_confirm"><br>
+        <input type="submit" value="Register" />
+    </form>
+    <h1>Login</h1>
+    <form action="/login" method = "POST">
+        {% csrf_token %}
+        Email: <input type="text" id="email" name="email"><br>
+        Password: <input type="password" id="pw" name="pw"><br>
+        <input type="submit" value="Login" />
+    </form>
+</body>
+</html>
